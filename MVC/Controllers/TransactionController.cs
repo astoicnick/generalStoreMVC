@@ -10,120 +10,43 @@ namespace MVC.Controllers
     public class TransactionController : Controller
     {
         private ApplicationDbContext _db = new ApplicationDbContext();
-        // GET: Transaction
-        public ActionResult Index()
-        {
-            return View(_db.Transactions.ToList());
-        }
-        // GET: Transaction/{id}
-        public ActionResult Details(int id)
-        {
-            Transaction transaction = _db.Transactions.Find(id);
 
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(transaction);
-        }
-        // GET: Transaction/Create
-        // ViewData / ViewBags
+        // GET Transaction/Create
         public ActionResult Create()
         {
-            var viewModel = new CreateTransactionViewModel();
-
-
-            viewModel.Customers = _db.Customers.Select(customer => new SelectListItem
-            {
-                Text = customer.FirstName + " " + customer.LastName,
-                Value = customer.CustomerId.ToString()
-            });
-
-            viewModel.Products = _db.Products.Select(product => new SelectListItem
-            {
-                Text = product.Name,
-                Value = product.ProductId.ToString()
-            });
-
-            return View(viewModel);
+            ViewData["Products"] = _db.Products.Select(p
+                => new SelectListItem
+                {
+                    Text = p.Name,
+                    Value = p.ProductId.ToString()
+                });
+            ViewData["Customers"] = _db.Customers.Select(c
+                => new SelectListItem
+                {
+                    Text = c.FirstName + " " + c.LastName,
+                    Value = c.CustomerId.ToString()
+                });
+            return View();
         }
-        // POST: Transaction/Create
+        // POST Transaction/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateTransactionViewModel viewModel)
+        public ActionResult Create(Transaction model)
         {
+            model.DateOfTransaction = DateTimeOffset.Now;
 
+            var createdObj =_db.Transactions.Add(model);
 
-            return View(viewModel);
-        }
-        // GET: Transaction/Delete/{id}
-        public ActionResult Delete(int id)
-        {
-            Transaction transaction = _db.Transactions.Find(id);
-
-            if (transaction == null)
+            if (_db.SaveChanges() == 1)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
+                //return Redirect("/transaction/" + createdObj.TransactionId);
             }
-
-            return View(transaction);
+            // ViewData["ErrMessage"]
+            return View(model);
         }
-        // POST: Transaction/Delete/{id}
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(Transaction transaction)
+        public ActionResult Index()
         {
-            // DO DB STUFF
-            if (/* something went wrong */ 1 != 1)
-            {
-                // return custom view
-                ViewData["ErrorMessage"] = "Couldn't delete your transaction";
-                return View(transaction);
-            }
-            return RedirectToAction("Index");
-        }
-        // GET: Transaction/Edit/{id}
-        public ActionResult Edit(int id)
-        {
-            Transaction transaction = _db.Transactions.Find(id);
-
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewData["Customers"] = _db.Customers.Select(customer => new SelectListItem
-            {
-                Text = customer.FirstName + " " + customer.LastName,
-                Value = customer.CustomerId.ToString()
-            });
-
-            ViewData["Products"] = _db.Products.Select(product => new SelectListItem
-            {
-                Text = product.Name,
-                Value = product.ProductId.ToString()
-            });
-
-            return View(transaction);
-        }
-        // POST: Transaction/Edit/{id}
-        [HttpPost]
-        public ActionResult Edit(Transaction transaction)
-        {
-            ViewData["Customers"] = _db.Customers.Select(customer => new SelectListItem
-            {
-                Text = customer.FirstName + " " + customer.LastName,
-                Value = customer.CustomerId.ToString()
-            });
-
-            ViewData["Products"] = _db.Products.Select(product => new SelectListItem
-            {
-                Text = product.Name,
-                Value = product.ProductId.ToString()
-            });
-
-            return View(transaction);
+            return View(_db.Transactions.ToArray());
         }
     }
 }

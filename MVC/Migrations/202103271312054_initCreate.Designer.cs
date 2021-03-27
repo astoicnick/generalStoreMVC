@@ -7,13 +7,13 @@ namespace MVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class transaction : IMigrationMetadata
+    public sealed partial class initCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(transaction));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012021950481_transaction"; }
+            get { return "202103271312054_initCreate"; }
         }
         
         string IMigrationMetadata.Source

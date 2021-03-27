@@ -3,10 +3,20 @@ namespace MVC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initCreate : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        CustomerId = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.CustomerId);
+            
             CreateTable(
                 "dbo.Products",
                 c => new
@@ -107,6 +117,7 @@ namespace MVC.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Products");
+            DropTable("dbo.Customers");
         }
     }
 }

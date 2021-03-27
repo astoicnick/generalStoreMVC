@@ -3,7 +3,7 @@ namespace MVC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class transaction : DbMigration
+    public partial class transactions : DbMigration
     {
         public override void Up()
         {
@@ -14,6 +14,7 @@ namespace MVC.Migrations
                         TransactionId = c.Int(nullable: false, identity: true),
                         CustomerId = c.Int(nullable: false),
                         ProductId = c.Int(nullable: false),
+                        DateOfTransaction = c.DateTimeOffset(nullable: false, precision: 7),
                     })
                 .PrimaryKey(t => t.TransactionId)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)

@@ -176,17 +176,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202012012027438_InitialCreate.cs" />
-    <Compile Include="Migrations\202012012027438_InitialCreate.Designer.cs">
-      <DependentUpon>202012012027438_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202103271312054_initCreate.cs" />
+    <Compile Include="Migrations\202103271312054_initCreate.Designer.cs">
+      <DependentUpon>202103271312054_initCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202012021943474_customer.cs" />
-    <Compile Include="Migrations\202012021943474_customer.Designer.cs">
-      <DependentUpon>202012021943474_customer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012021950481_transaction.cs" />
-    <Compile Include="Migrations\202012021950481_transaction.Designer.cs">
-      <DependentUpon>202012021950481_transaction.cs</DependentUpon>
+    <Compile Include="Migrations\202103271330056_transactions.cs" />
+    <Compile Include="Migrations\202103271330056_transactions.Designer.cs">
+      <DependentUpon>202103271330056_transactions.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,11 +255,8 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
-    <Content Include="Views\Transaction\Index.cshtml" />
     <Content Include="Views\Transaction\Create.cshtml" />
-    <Content Include="Views\Transaction\Delete.cshtml" />
-    <Content Include="Views\Transaction\Edit.cshtml" />
-    <Content Include="Views\Transaction\Details.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,14 +275,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012012027438_InitialCreate.resx">
-      <DependentUpon>202012012027438_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103271312054_initCreate.resx">
+      <DependentUpon>202103271312054_initCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012021943474_customer.resx">
-      <DependentUpon>202012021943474_customer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012021950481_transaction.resx">
-      <DependentUpon>202012021950481_transaction.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202103271330056_transactions.resx">
+      <DependentUpon>202103271330056_transactions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
